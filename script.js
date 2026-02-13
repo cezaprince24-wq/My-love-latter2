@@ -14,7 +14,7 @@ function login() {
 let scale = 1;
 function growNo() {
   scale += 0.4;
-  document.getElementById("noBtn").style.transform = `scale(${scale})`;
+  document.getElementById("yesBtn").style.transform = `scale(${scale})`;
 }
 
 // YES BUTTON
@@ -100,4 +100,56 @@ function startMedia() {
   if (bg && bg.tagName === 'AUDIO') bg.play().catch(()=>{});
   startHearts();
   startSlideshow();
+}
+
+// QUIZ CHECK
+function checkQuiz() {
+  const a1 = document.getElementById("q1").value.toLowerCase();
+  const a2 = document.getElementById("q2").value.toLowerCase();
+  const a3 = document.getElementById("q3").value.toLowerCase();
+  const a4 = document.getElementById("q4").value.toLowerCase();
+
+  if (a1 === "black" &&
+      a2 === "church" &&
+      a3 === "ella" &&
+      a4 === "mama") {
+        window.location.href = "love.html";
+  } else {
+        alert("You got something wrong 😏 Try again");
+  }
+}
+
+// TIMER (1 minute)
+let time = 60; // 1 minute in seconds
+const timer = setInterval(() => {
+  if (document.getElementById("timer")) {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+    document.getElementById("timer").innerText =
+      `Time Left: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    time--;
+
+    if (time < 0) {
+      clearInterval(timer);
+      document.getElementById("quizForm").classList.add("hidden");
+      document.getElementById("passcodeSection").classList.remove("hidden");
+    }
+  }
+}, 1000);
+
+// PASSCODE
+function checkPasscode() {
+  const passcode = document.getElementById("passcode").value;
+  if (passcode === "1234") {
+    window.location.href = "love.html";
+  } else {
+    alert("Wrong passcode 😈");
+  }
+}
+
+function backToQuiz() {
+  document.getElementById("quizForm").classList.remove("hidden");
+  document.getElementById("passcodeSection").classList.add("hidden");
+  // Reload the page to reset timer and form
+  location.reload();
 }
