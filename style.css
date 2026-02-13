@@ -106,7 +106,7 @@ button:hover {
 /* Slideshow (show one at a time) */
 .gallery.slideshow {
   display: block;
-  max-width: 600px; /* limit slideshow width to a normal size */
+  max-width: 600px;
   width: 100%;
   margin: 20px auto 0;
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
@@ -116,7 +116,7 @@ button:hover {
   display: none;
   width: 100%;
   height: auto;
-  max-height: 480px; /* prevent overly tall media */
+  max-height: 480px;
   object-fit: cover;
 }
 .gallery.slideshow .active {
