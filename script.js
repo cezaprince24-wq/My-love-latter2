@@ -1,96 +1,48 @@
-// LOGIN
-function login() {
-  const petName = document.getElementById("petName").value.trim();
-  const error = document.getElementById("errorMsg");
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prove You Know Me 😏</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  if (petName.toLowerCase() === "mama") {
-    window.location.href = "valentine.html";
-  } else {
-    error.textContent = "Wrong pet name 😢";
-  }
-}
+<div class="quiz-card">
+  <h1>Answer These About Me ❤️</h1>
+  <p id="timer">Time Left: 1:00</p>
 
-// NO BUTTON GROW 😈
-let scale = 1;
-function growNo() {
-  scale += 0.4;
-  document.getElementById("yesBtn").style.transform = `scale(${scale})`;
-}
+  <form id="quizForm">
+    <div class="question">
+      <p>1. What is my favorite color?</p>
+      <input type="text" id="q1">
+    </div>
 
-// YES BUTTON
-function goToLove() {
-  window.location.href = "love.html";
-}
+    <div class="question">
+      <p>2. Where did we first meet?</p>
+      <input type="text" id="q2">
+    </div>
 
-// START MEDIA
-function startMedia() {
-  document.getElementById("gallery").classList.remove("hidden");
-  const bg = document.getElementById("bgMusic");
-  if (bg && bg.tagName === 'AUDIO') bg.play().catch(()=>{});
-  startHearts();
-  startSlideshow();
-}
+    <div class="question">
+      <p>3. What food do I love most?</p>
+      <input type="text" id="q3">
+    </div>
 
-// TYPEWRITER (title)
-document.addEventListener('DOMContentLoaded', () => {
-  const h = document.querySelector('.typewriter');
-  if (h) {
-    const text = h.getAttribute('data-text') || h.textContent;
-    h.textContent = '';
-    let i = 0;
-    const speed = 80;
-    function type() {
-      if (i <= text.length) {
-        h.textContent = text.slice(0, i);
-        i++;
-        setTimeout(type, speed);
-      }
-    }
-    type();
-  }
-});
+    <div class="question">
+      <p>4. What name do I call you most?</p>
+      <input type="text" id="q4">
+    </div>
 
-// HEARTS
-let heartInterval;
-function startHearts() {
-  if (heartInterval) return;
-  const container = document.querySelector('.hearts');
-  heartInterval = setInterval(() => {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    const size = Math.random() * 24 + 12;
-    heart.style.width = size + 'px';
-    heart.style.height = size + 'px';
-    heart.style.left = Math.random() * 100 + '%';
-    heart.style.background = `hsl(${Math.random() * 20 + 330},90%,60%)`;
-    heart.style.animationDuration = (5 + Math.random() * 4) + 's';
-    container.appendChild(heart);
-    setTimeout(() => heart.remove(), 9000);
-  }, 500);
-}
+    <button type="button" onclick="checkQuiz()">Submit Answers</button>
+  </form>
 
-// SLIDESHOW
-let slideIndex = 0;
-let slideTimer;
-function startSlideshow() {
-  const gallery = document.getElementById('gallery');
-  if (!gallery) return;
-  gallery.classList.add('slideshow');
-  const items = Array.from(gallery.querySelectorAll('img, video'));
-  if (!items.length) return;
-  function show(index) {
-    items.forEach((it, i) => {
-      it.classList.toggle('active', i === index);
-      if (it.tagName === 'VIDEO') {
-        if (i === index) it.currentTime = 0;
-        if (i === index) it.play().catch(()=>{});
-        else it.pause();
-      }
-    });
-  }
-  show(slideIndex);
-  slideTimer = setInterval(() => {
-    slideIndex = (slideIndex + 1) % items.length;
-    show(slideIndex);
-  }, 3500);
-}
+  <div id="passcodeSection" class="hidden">
+    <h3>Time’s up 😈 Enter Secret Passcode</h3>
+    <input type="password" id="passcode">
+    <button onclick="checkPasscode()">Enter</button>    <button onclick="backToQuiz()">Back to Quiz</button>  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
